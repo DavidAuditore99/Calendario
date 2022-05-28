@@ -1,0 +1,88 @@
+#calendar{
+}
+#header{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: inset;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 4%);
+}
+img{
+    margin: 10px;
+}
+#line{
+    height: 10px;
+    background-color: rgb(35,36,82);
+    right: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: inset;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 4%);
+}
+.fc .fc-button-primary{
+    color: rgb(125,125,125);
+}
+.fc .fc-button-primary:hover{
+    color: rgb(75, 75, 75);
+}
+.fc .fc-button-primary{
+    background-color: rgb(255, 255, 255);
+    border-color: white;
+}
+.fc .fc-button-primary:hover{
+    background-color: rgb(212, 212, 212);
+    border-color: white;
+}
+.fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active{
+    background-color: rgb(95, 195, 253);
+    border-color: white;
+}
+.fc-toolbar-chunk{
+display: flex;
+}
+#body{
+    margin: 8% 8% 0 8%;
+}
+#botones{
+    margin-bottom: 20px;
+}
+#AgregarEvento{
+    background-color: rgb(47, 0, 255);
+    border-color: rgb(47, 0, 255);
+    border-radius: .5em;
+    color: white;
+    height: 40px;
+    width: 80px;
+    font-weight: bolder;
+}
+.botonSuperior{
+    background-color: rgba(240, 241, 255, 0);
+    height: 40px;
+    border-color: rgba(240, 248, 255, 0);
+    font-weight: bold;
+    font-size: 15px;
+    margin: 0 15px;
+}
+.botonSuperior:hover{
+    background-color: rgba(143, 143, 143, 0.418);
+    height: 40px;
+    border-color: rgba(240, 248, 255, 0);
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button[title="This MES"]{
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.199) !important;
+    color: rgb(35,36,82) !important;
+    font-weight: 2000 !important; 
+}
+button[title="This MES"]:hover{
+    height: 50px;
+    background-color: rgb(35,36,82) !important;
+    color: rgb(255, 255, 255) !important;
+    font-weight: 2000 !important; 
+    transition: .3s;
+}

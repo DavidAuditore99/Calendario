@@ -23,3 +23,8 @@ input{
 button{
     margin-top: 20px;
 }
+#fc-dom-1{
+    margin: 5% !important;
+}
+.fc .fc-toolbar{
+}
