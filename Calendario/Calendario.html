@@ -1,0 +1,149 @@
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link href='lib/main.css' rel='stylesheet' />
+    <script src='lib/main.js'></script>
+    <link href='Calendario.css' rel='stylesheet' />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script 
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      ></script>
+      <script>
+      var calendar;
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        calendar = new FullCalendar.Calendar(calendarEl, {
+          dateClick: function(info){
+            console.log(info);
+          },
+          views:{
+            dayGridMonth: { // name of view
+                titleFormat: { year: 'numeric', month: 'long' }
+                // other view-specific options here
+              }
+          },
+          contentHeight: "auto",
+          initialView: 'dayGridMonth',
+          timeZone: 'America/Mexico_City',
+          locale: 'es',
+          headerToolbar: {
+          left: ' today prev next, title,',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        },
+        buttonText:{
+          today:    'HOY',
+          month:    'MES',
+          week:     'SEMANA',
+          day:      'DIA',
+          list:     'LISTA',
+        },
+        eventClick:(info)=>MostrarDetallesEvento(info),
+        dayHeaderFormat:{ weekday: 'long' },
+        dayHeaderContent : (arg)=> arg.text = arg.text.toUpperCase()
+        });
+        calendar.render();
+        ObtenerEventos();
+      });
+    </script>
+    <script src="./Js/Calendario/Calendario.js"></script>
+  </head>
+  <body style="font-family: 'Roboto', sans-serif;">
+    <div id="header">
+      <img src="./CC-Logo.png" style="width: 20%; height: auto;">
+      <div id="line"> </div>
+    </div>
+    <div id="body">
+      <div id="botones">
+        <button id="AgregarEvento" onclick="MostrarModal()" "><i class="fa fa-plus" aria-hidden="true"></i> NUEVO</button>
+        <button class="botonSuperior"><i class="fa fa-search" aria-hidden="true"></i> BUSCAR</button>
+        <button class="botonSuperior"><i class="fa fa-user-circle-o" aria-hidden="true"></i> USUARIO</button>
+        <button class="botonSuperior"><i class="fa fa-filter" aria-hidden="true"></i> FILTRAR</button>
+      </div>
+      <div id='calendar'></div>
+    </div>
+    
+    <div id="line"> </div>
+
+
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar Evento</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="Nombre" placeholder="name@example.com">
+              <label for="Nombre">Nombre Del Evento</label>
+            </div>
+            <div class="form-floating">
+              <select class="form-select" id="Contacto" aria-label="Floating label select example">
+                <option selected>Seleccione un contacto</option>
+                <option value="One">One</option>
+                <option value="Two">Two</option>
+                <option value="Three">Three</option>
+              </select>
+              <label for="floatingSelect">Contacto</label>
+            </div>
+            <br>
+            <div class="form-floating">
+              <select class="form-select" id="Horario" aria-label="Floating label select example">
+                <option selected>Seleccione un horario</option>
+                <option value="Desayuno">Desayuno</option>
+                <option value="Comida">Comida</option>
+                <option value="Cena">Cena</option>
+              </select>
+              <label for="floatingSelect">Horario</label>
+            </div>
+            <br>
+            <label>Fecha el Evento:</label>
+            <input type="date" id="fecha">
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="Detalles" style="height: 100px; margin-top: 10px;"></textarea>
+              <label for="Detalles">Descripción y Detalles del Evento</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="CrearEvento()">Guardar Evento</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label>Nombre del Evento:</label><br>
+        <p id="NombreEvt"></p>
+        <label>Contacto:</label><br>
+        <p id="ContactoEvt"></p>
+        <label>Horario:</label><br>
+        <p id="HorarioEvt"></p>
+        <label>Fecha del Evento:</label><br>
+        <p id="FechaEvt"></p>
+        <label>Contacto:</label><br>
+        <p id="DetallesEvt"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+</html>
