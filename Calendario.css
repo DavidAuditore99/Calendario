@@ -1,4 +1,6 @@
-#calendar{
+a{
+    color: #000000 !important;
+    text-decoration: none !important;
 }
 #header{
     position: absolute;
@@ -46,6 +48,7 @@ display: flex;
 }
 #botones{
     margin-bottom: 20px;
+    
 }
 #AgregarEvento{
     background-color: rgb(47, 0, 255);
@@ -53,8 +56,12 @@ display: flex;
     border-radius: .5em;
     color: white;
     height: 40px;
-    width: 80px;
+    width: 90px;
     font-weight: bolder;
+    cursor: pointer;
+}
+#AgregarEvento:hover{
+    background-color: rgb(33, 0, 182);
 }
 .botonSuperior{
     background-color: rgba(240, 241, 255, 0);
@@ -85,4 +92,30 @@ button[title="This MES"]:hover{
     color: rgb(255, 255, 255) !important;
     font-weight: 2000 !important; 
     transition: .3s;
+}
+#fecha {
+    appearance: none;
+    color: #1D1D1D;
+    font-family: “Helvetica”, arial, sans-serif;
+    font-size: 18px;
+    border:1px solid #ECF0F1;
+    background:#ECF0F1;
+    padding: 4px;
+    display: inline-block;
+    visibility: visible;
+    width: 140px;
+    }
+    #fecha:focus {
+    color: #8f9091;
+    background-color: #FFFFFF;
+    border-color: #80BDFF;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+#fecha{
+    border-radius: 10px;
+    border-color: #b8b8b8;
+}
+p{
+    font-weight: 900;
 }
