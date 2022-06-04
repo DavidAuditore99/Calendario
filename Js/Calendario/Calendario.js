@@ -17,6 +17,7 @@ function OcultarModal(){
     modal.hide();
 }
 function MostrarDetallesEvento(info){
+    console.log(info)
     var modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
     document.getElementById("NombreEvt").innerHTML=info.event.title;
     document.getElementById("ContactoEvt").innerHTML=info.event.extendedProps.contacto;

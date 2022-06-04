@@ -11,15 +11,15 @@ class Event{
     }
 }
 
-$server="127.0.0.1";
-$user="root";
-$Sqlpassword="Contrasena";
+$server="bxqheeukutfa3by8nscd-mysql.services.clever-cloud.com";
+$user="uoknsn97hhefuctz";
+$Sqlpassword="fDpHK3OfXHPOFPexy9ry";
 $Eventos = array();
 $conn = new mysqli($server,$user,$Sqlpassword);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
     }else{
-        $query = "SELECT * From carpascb.eventos;";
+        $query = "SELECT * From bxqheeukutfa3by8nscd.eventos;";
         $result = $conn->query($query);
         if ($result->num_rows>0) {
             while($row = $result->fetch_assoc()){
