@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=UTF-8');
 $var = $_GET["Email"];
 $var2 = $_GET["Password"];
 $server="bxqheeukutfa3by8nscd-mysql.services.clever-cloud.com";

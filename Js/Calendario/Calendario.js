@@ -26,7 +26,22 @@ function MostrarDetallesEvento(info){
     date.setDate(date.getDate() +1);
     document.getElementById("FechaEvt").innerHTML=date.toLocaleDateString('mx-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     document.getElementById("DetallesEvt").innerHTML=info.event.extendedProps.decripcion;
+    document.getElementById("borrarEvt").onclick = ()=>EliminarEvento(info.event.id)
+    console.log(info.event.id)
     modal.show();
+}
+function EliminarEvento(IdEvt) {
+    $.post("./Php/EliminarEvento.php",{id : IdEvt}, (info)=>{
+        console.log(IdEvt)
+        if(info==="Exito"){
+            alert("Se ha eliminado el evento del calendario");
+            document.location.reload(true);
+        }else{
+            alert("Hubo un error al eliminar el evento, intente mas tarde " + info)
+            var modal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
+            modal.show();
+        }
+        })
 }
 function CrearEvento(){
     let evento={
@@ -40,16 +55,29 @@ function CrearEvento(){
         alert("Llena todos los campos antes de continuar")
     }else{
         $.post("./Php/CrearEvento.php",evento, (data)=>{
-            calendar.addEvent({ 
+            calendar.addEvent({
                 title: evento.nombre, 
                 start: evento.fecha,
                 contacto: evento.contacto, 
                 horario: evento.horario, 
                 decripcion: evento.descripcion, 
               })
+              document.location.reload(true);
         })
     }
     
+}
+function AgregarUsuario(){
+    var usuario ={
+        Nombre: document.getElementById("Nombre").value,
+        ApPat:document.getElementById("ApPat").value,
+        ApMat:document.getElementById("ApMat").value,
+        Email:document.getElementById("email").value,
+        Password:document.getElementById("password").value
+    }
+    $.post("./Php/AgregarUsuario.php",usuario,(response)=>{
+        console.log(response)
+    })
 }
 function ObtenerEventos(){
     $.post("./Php/ObtenerEventos.php", (data)=>{
@@ -61,6 +89,7 @@ function ObtenerEventos(){
                 contacto: data2[index].Contacto, 
                 horario: data2[index].Horario, 
                 decripcion: data2[index].Descripcion, 
+                id: data2[index].Id, 
               })
         }
     })

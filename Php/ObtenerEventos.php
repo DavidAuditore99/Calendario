@@ -1,8 +1,9 @@
 <?php
 
 class Event{
-    public function __construct($Nombre,$Contacto,$Horario,$Fecha,$Descripcion)
+    public function __construct($id,$Nombre,$Contacto,$Horario,$Fecha,$Descripcion)
     {
+        $this->Id = $id;
         $this->Nombre = $Nombre;
         $this->Contacto = $Contacto;
         $this->Horario = $Horario;
@@ -23,7 +24,7 @@ if ($conn->connect_error) {
         $result = $conn->query($query);
         if ($result->num_rows>0) {
             while($row = $result->fetch_assoc()){
-                $Evento = new Event($row["Nombre"],$row["Contacto"],$row["Horario"],$row["Fecha"],$row["Descripcion"]);
+                $Evento = new Event($row["idEventos"],$row["Nombre"],$row["Contacto"],$row["Horario"],$row["Fecha"],$row["Descripcion"]);
                 array_push($Eventos,$Evento);
             }
             echo json_encode($Eventos);

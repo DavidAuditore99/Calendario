@@ -1,6 +1,7 @@
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href='lib/main.css' rel='stylesheet' />
     <script src='lib/main.js'></script>
     <link href='Calendario.css' rel='stylesheet' />
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="./Js/Calendario/Calendario.js"></script>
     <script 
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       ></script>
@@ -20,7 +22,8 @@
         var calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
           dateClick: function(info){
-            console.log(info);
+            document.getElementById("fecha").value = info.dateStr;
+            MostrarModal()
           },
           views:{
             dayGridMonth: { // name of view
@@ -51,7 +54,7 @@
         ObtenerEventos();
       });
     </script>
-    <script src="./Js/Calendario/Calendario.js"></script>
+    
   </head>
   <body style="font-family: 'Roboto', sans-serif;">
     <div id="header">
@@ -60,10 +63,10 @@
     </div>
     <div id="body">
       <div id="botones">
-        <button id="AgregarEvento" onclick="MostrarModal()" "><i class="fa fa-plus" aria-hidden="true"></i> NUEVO</button>
         <button class="botonSuperior"><i class="fa fa-search" aria-hidden="true"></i> BUSCAR</button>
         <button class="botonSuperior"><i class="fa fa-user-circle-o" aria-hidden="true"></i> USUARIO</button>
         <button class="botonSuperior"><i class="fa fa-filter" aria-hidden="true"></i> FILTRAR</button>
+        <button class="botonSuperior" data-bs-toggle="modal" data-bs-target="#AgregarUsuario"><i class="fa fa-user-plus" aria-hidden="true"></i> AGREGAR USUARIO</button>
       </div>
       <div id='calendar'></div>
     </div>
@@ -124,7 +127,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Detalles del Evento</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -140,7 +143,47 @@
         <p id="DetallesEvt"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="borrarEvt" type="button" class="btn btn-danger" data-bs-dismiss="modal">Borrar Evento</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="AgregarUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="AgregarUsuarioLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AgregarUsuarioLabel">Agregar un Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="Nombre" placeholder="name@example.com">
+          <label for="Nombre">Nombre(s)</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="ApPat" placeholder="name@example.com">
+          <label for="Nombre">Apellido Paterno</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="ApMat" placeholder="name@example.com">
+          <label for="Nombre">Apellido Materno</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="email" placeholder="name@example.com">
+          <label for="Nombre">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="password" placeholder="name@example.com">
+          <label for="Nombre">Contraseña</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button id="borrarEvt" type="button" class="btn btn-info" data-bs-dismiss="modal" onclick="AgregarUsuario()">Registrar</button>
       </div>
     </div>
   </div>

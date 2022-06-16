@@ -7,6 +7,8 @@ function IniciarSesion(){
     $.get("./Php/Login.php",{Email: email, Password: pass}, (data)=>{
         if (data ==="Exito") {
             window.location.href ="Calendario.html"
+        }else{
+            alert("Correo y/o Contraseña incorrectos")
         }
     })
     }
