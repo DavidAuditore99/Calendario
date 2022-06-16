@@ -20,7 +20,8 @@
         var calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
           dateClick: function(info){
-            console.log(info);
+            document.getElementById("fecha").value = info.dateStr;
+            MostrarModal()
           },
           views:{
             dayGridMonth: { // name of view
